@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="section home-section">
+    <div class="home-content">
+      <img src="file:///C:/Users/HP/Downloads/1a0490fa-ff37-4022-92ac-d91ca078be0c.png" alt="Kathleen Mae Duco" class="home-picture" id="profile-picture">
+      <h1>Kathleen Mae Duco</h1>
+      <p>I am a second-year college student majoring in Web Development at the University of the Cordilleras.</p>
+      <a href="#projects" class="btn learn-more-btn">Learn More</a>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>Technical Documentation Page</h3>
+      <a href="file:///C:/Users/HP/OneDrive%20-%20University%20of%20the%20Cordilleras/Desktop/DUCO/Technical%20Documentation%20Page.html">View Project</a>
+    </div>
+    <!-- Add more project items here -->
+    <div class="project">
+        <h3>Product Landing Page</h3>
+        <a href="file:///C:/Users/HP/OneDrive%20-%20University%20of%20the%20Cordilleras/Desktop/DUCO/Product%20Landing%20Page.html">View Project</a>
+      </div>
+      <!-- Add more project items here -->
+  </section>
+
+  <section id="skills" class="section">
+    <h2>Skills</h2>
+    <div class="skill">
+      <h3>HTML</h3>
+      <div class="progress">
+        <div class="progress-bar" style="width: 85%;">85%</div>
+      </div>
+    </div>
+    <div class="skill">
+      <h3>CSS</h3>
+      <div class="progress">
+        <div class="progress-bar" style="width: 80%;">80%</div>
+      </div>
+    </div>
+    <div class="skill">
+      <h3>JavaScript</h3>
+      <div class="progress">
+        <div class="progress-bar" style="width: 70%;">70%</div>
+      </div>
+    </div>
+    <!-- Add more skills here -->
+  </section>
+  
+
+  <section id="contact" class="section">
+    <h2>Contact Me</h2>
+    <form action="#" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Kathleen Mae Duco</p>
+  </footer>
+
+  <script>
+    
+    const profilePicture = document.getElementById('profile-picture');
+
+// Function to apply "shake" effect on mouse enter
+function applyShakeEffect() {
+  profilePicture.classList.add('shake');
+}
+
+// Function to remove "shake" effect on mouse leave
+function removeShakeEffect() {
+  profilePicture.classList.remove('shake');
+}
+
+// Event listeners for mouse enter and mouse leave events
+profilePicture.addEventListener('mouseenter', applyShakeEffect);
+profilePicture.addEventListener('mouseleave', removeShakeEffect);
+
+    document.querySelectorAll('.nav-link').forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    const targetSection = document.querySelector(button.getAttribute('href'));
+    targetSection.scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+    document.querySelectorAll('.learn-more-btn').forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    const targetSection = document.querySelector(button.getAttribute('href'));
+    targetSection.scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+
+function showSlide(n) {
+    slides.forEach(slide => {
+        slide.style.display = 'none';
+    });
+    slides[n].style.display = 'block';
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+}
+
+showSlide(currentSlide);
+
+document.getElementById('prev').addEventListener('click', prevSlide);
+document.getElementById('next').addEventListener('click', nextSlide);
+
+// Form Validation
+const form = document.querySelector('form');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (name === '' || email === '' || message === '') {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    if (!isValidEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    // Send form data
+    console.log(`Name: ${name}, Email: ${email}, Message: ${message}`);
+    form.reset();
+});
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+  </script>
+
+  <style>
+  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f7f7f7;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+section {
+  padding: 50px 20px;
+}
+
+h1, h2, h3 {
+  margin-bottom: 20px;
+}
+
+.home-section {
+  background-color: #333; /* Add a background color for better contrast */
+  color: #fff;
+  text-align: center;
+  padding: 100px 0;
+}
+
+.home-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.home-picture {
+  display: block;
+  width: 300px; /* Adjust the width as needed */
+  height: auto;
+  border-radius: 50%; /* Make the picture round */
+  margin: 0 auto 30px; /* Add some bottom margin */
+}
+
+.home-content h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.home-content p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #fff; /* Change the button color to white */
+  color: #333; /* Change the text color to dark */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #eee; /* Lighten the background color on hover */
+}
+
+.project {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.project h3 {
+  color: #333;
+}
+
+.project p {
+  color: #666;
+}
+
+.project a {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.skill {
+  margin-bottom: 20px;
+}
+
+.progress {
+  background-color: #eee;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 5px;
+}
+
+
+blockquote {
+  font-style: italic;
+  color: #666;
+}
+
+cite {
+  font-weight: bold;
+}
+
+/* styles.css */
+
+/* Contact Form */
+#contact form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#contact form input[type="text"],
+#contact form input[type="email"],
+#contact form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#contact form textarea {
+  height: 150px;
+}
+
+#contact form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#contact form button:hover {
+  background-color: #555;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
+
+  </style>
+</body>
+</html>
